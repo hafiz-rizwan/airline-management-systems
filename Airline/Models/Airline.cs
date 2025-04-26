@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AirlineManagement.Models;
 
 namespace Airline.Models;
 

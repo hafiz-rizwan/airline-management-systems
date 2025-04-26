@@ -49,11 +49,9 @@ namespace Airline.Controllers
         }
 
         // POST: Airlines/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AirlineId,AirlineName,Country,ContactNumber")] Airline airline)
+        public async Task<IActionResult> Create([Bind("AirlineId,AirlineName,Country,ContactNumber")] Airline.Models.Airline airline)
         {
             if (ModelState.IsValid)
             {
