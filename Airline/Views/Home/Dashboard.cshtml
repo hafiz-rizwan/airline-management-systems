@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    Airlines
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Manage Airlines in the system.</p>
+                    <a href="@Url.Action("Index", "Airlines")" class="btn btn-primary">View Airlines</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    Flights
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Manage Flights in the system.</p>
+                    <a href="@Url.Action("Index", "Flights")" class="btn btn-primary">View Flights</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    Passengers
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Manage Passengers in the system.</p>
+                    <a href="@Url.Action("Index", "Passengers")" class="btn btn-primary">View Passengers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

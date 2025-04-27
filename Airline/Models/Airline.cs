@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using AirlineManagement.Models;
 
-namespace AirlineManagement.Models ;
-
-public partial class Airline
+namespace AirlineManagement.Models
 {
-    public int AirlineId { get; set; }
+    public class Airline
+    {
+        public int AirlineId { get; set; }
+        public required string AirlineName { get; set; }
+        public required string Country { get; set; }
+        public required string ContactNumber { get; set; }
 
-    public string? AirlineName { get; set; }
-
-    public string? Country { get; set; }
-
-    public string? ContactNumber { get; set; }
-
-    public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();
-
-    public virtual ICollection<Staff> Staff { get; set; } = new List<Staff>();
+        // Navigation properties
+        public ICollection<Flight> Flights { get; set; } = new List<Flight>();
+        public ICollection<Staff> Staff { get; set; } = new List<Staff>();
+    }
 }

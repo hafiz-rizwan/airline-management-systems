@@ -63,9 +63,14 @@ namespace AirlineManagement.Controllers
         }
 
         // GET: Airlines/Edit/5
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var airline = _context.Airlines.Find(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var airline = await _context.Airlines.FindAsync(id);
             if (airline == null)
             {
                 return NotFound();
@@ -76,12 +81,31 @@ namespace AirlineManagement.Controllers
         // POST: Airlines/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(AirlineManagement.Models.Airline airline) // Fully qualified
+        public async Task<IActionResult> Edit(int id, [Bind("AirlineId,AirlineName,Country,ContactNumber")] AirlineManagement.Models.Airline airline) // Fully qualified
         {
+            if (id != airline.AirlineId)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Update(airline);
-                _context.SaveChanges();
+                try
+                {
+                    _context.Update(airline);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AirlineExists(airline.AirlineId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(airline);
