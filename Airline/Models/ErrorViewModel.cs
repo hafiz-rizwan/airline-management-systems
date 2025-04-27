@@ -1,4 +1,4 @@
-namespace Airline.Models;
+namespace AirlineManagement.Models ;
 
 public class ErrorViewModel
 {

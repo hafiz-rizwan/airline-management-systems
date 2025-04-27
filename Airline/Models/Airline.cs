@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using AirlineManagement.Models;
 
-namespace Airline.Models;
+namespace AirlineManagement.Models ;
 
 public partial class Airline
 {

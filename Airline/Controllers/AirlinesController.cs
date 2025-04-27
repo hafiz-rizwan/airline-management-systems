@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Airline.Models;
+using AirlineManagement.Models; // Updated namespace
 
-namespace Airline.Controllers
+namespace AirlineManagement.Controllers
 {
     public class AirlinesController : Controller
     {
@@ -51,7 +51,7 @@ namespace Airline.Controllers
         // POST: Airlines/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AirlineId,AirlineName,Country,ContactNumber")] Airline.Models.Airline airline)
+        public async Task<IActionResult> Create([Bind("AirlineId,AirlineName,Country,ContactNumber")] AirlineManagement.Models.Airline airline) // Fully qualified
         {
             if (ModelState.IsValid)
             {
@@ -63,14 +63,9 @@ namespace Airline.Controllers
         }
 
         // GET: Airlines/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var airline = await _context.Airlines.FindAsync(id);
+            var airline = _context.Airlines.Find(id);
             if (airline == null)
             {
                 return NotFound();
@@ -79,35 +74,14 @@ namespace Airline.Controllers
         }
 
         // POST: Airlines/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AirlineId,AirlineName,Country,ContactNumber")] Airline airline)
+        public IActionResult Edit(AirlineManagement.Models.Airline airline) // Fully qualified
         {
-            if (id != airline.AirlineId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(airline);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AirlineExists(airline.AirlineId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.Update(airline);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(airline);

@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Airline.Models;
-
-public partial class Passenger
+namespace AirlineManagement.Models
 {
-    public int PassengerId { get; set; }
-
-    public string? Name { get; set; }
-
-    public string? PassportNumber { get; set; }
-
-    public string? Nationality { get; set; }
-
-    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    public class Passenger
+    {
+        public int PassengerId { get; set; }
+        public required string Name { get; set; }
+        public required string Nationality { get; set; }
+        public required string PassportNumber { get; set; }
+        public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    }
 }

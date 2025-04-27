@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Airline.Models;
+namespace AirlineManagement.Models ;
 
 public partial class Ticket
 {
